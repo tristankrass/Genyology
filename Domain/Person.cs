@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain
@@ -23,5 +24,8 @@ namespace Domain
         public string? Occupation { get; set; }
 
         public string? BirthSurname { get; set; }
+
+        public ICollection<Relationship>? PersonOneRelationships { get; set; }
+        public ICollection<Relationship>? PersonTwoRelationships { get; set; }
     }
 }

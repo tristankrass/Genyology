@@ -19,5 +19,7 @@ namespace Domain
 
         public Guid PersonId { get; set; } = default!;
         public Person? Person { get; set; }
+
+        public ICollection<Relationship>? Relationships { get; set; }
     }
 }
