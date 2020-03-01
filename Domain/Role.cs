@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DAL.Base;
 
 namespace Domain
 {
-  public class Role
+  public class Role : DomainEntity
     {
-        public Guid RoleId { get; set; }
-
         [MaxLength(100)]
         public string RoleDescription { get; set; } = default!;
 

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DAL.Base;
 
 namespace Domain
 {
-  public class Relationship
+  public class Relationship : DomainEntity
     {
-        public Guid RelationshipId { get; set; }
-
         public DateTime DateTimeFrom { get; set; } = default!;
         public DateTime DateTimeTo { get; set; } = default!;
 

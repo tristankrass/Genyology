@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using DAL.Base;
 
 namespace Domain
 {
-    public class RelationshipType
+    public class RelationshipType : DomainEntity
     {
-        public Guid RelationshipTypeId { get; set; }
 
         [MaxLength(20)] public string RelationShipTypeDescription { get; set; } = default!;
 

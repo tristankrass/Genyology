@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DAL.Base;
 
 namespace Domain
 {
-    public class Person
+    public class Person: DomainEntity
     {
         public Guid PersonId { get; set; }
 

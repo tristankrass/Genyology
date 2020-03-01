@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using DAL.Base;
 
 namespace Domain
 {
-    public class Family
+    public class Family : DomainEntity
     {
-        public Guid FamilyId { get; set; }
 
         public string FamilyName { get; set; } = default!;
 
