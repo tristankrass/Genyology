@@ -10,5 +10,7 @@ namespace Domain
         public Guid RelationshipTypeId { get; set; }
 
         [MaxLength(20)] public string RelationShipTypeDescription { get; set; } = default!;
+
+        private ICollection<Relationship>? Relationships { get; set; }
     }
 }

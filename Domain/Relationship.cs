@@ -32,13 +32,14 @@ namespace Domain
         // Role Relationship starts here
         [ForeignKey(nameof(RoleOne))]
         public Guid RoleOneId { get; set; } = default!;
+
         public Role? RoleOne { get; set; }
 
         [ForeignKey(nameof(RoleTwo))]
         public Guid RoleTwoId { get; set; } = default!;
         public Role? RoleTwo { get; set; }
 
-        // Relationshiptype here
+        // Relationship here
         public Guid RelationshipTypeId { get; set; } = default!;
         public RelationshipType? RelationshipType { get; set; }
         

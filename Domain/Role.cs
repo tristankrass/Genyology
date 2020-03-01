@@ -9,7 +9,7 @@ namespace Domain
     {
         public Guid RoleId { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(100)]
         public string RoleDescription { get; set; } = default!;
 
         [InverseProperty(nameof(Relationship.PersonOne))]
