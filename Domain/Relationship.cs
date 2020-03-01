@@ -20,21 +20,21 @@ namespace Domain
 
 
         // Person Relationship starts here
-        [ForeignKey(nameof(PersonOne))]
+        // [ForeignKey(nameof(PersonOne))]
         public Guid PersonOneId { get; set; } = default!;
         public Person? PersonOne { get; set; }
 
-        [ForeignKey(nameof(PersonTwo))]
+        // [ForeignKey(nameof(PersonTwo))]
         public Guid PersonTwoId { get; set; } = default!;
         public Person? PersonTwo { get; set; }
 
         // Role Relationship starts here
-        [ForeignKey(nameof(RoleOne))]
+        // [ForeignKey(nameof(RoleOne))]
         public Guid RoleOneId { get; set; } = default!;
 
         public Role? RoleOne { get; set; }
 
-        [ForeignKey(nameof(RoleTwo))]
+        // [ForeignKey(nameof(RoleTwo))]
         public Guid RoleTwoId { get; set; } = default!;
         public Role? RoleTwo { get; set; }
 

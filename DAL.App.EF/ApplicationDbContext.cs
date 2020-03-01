@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Linq;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF
@@ -17,32 +18,12 @@ namespace DAL.App.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Relationship between roles and relationships
-            modelBuilder.Entity<Role>()
-                .HasMany(role => role.RelationshipsOne)
-                .WithOne(relationship => relationship.RoleOne)
-                .HasForeignKey(relationship => relationship.RoleOneId)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            modelBuilder.Entity<Role>()
-                .HasMany(role => role.RelationshipsTwo)
-                .WithOne(r => r.RoleTwo)
-                .HasForeignKey(relationship => relationship.RoleTwoId)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            
-            // Relationship between roles and relationships
-            modelBuilder.Entity<Person>()
-                .HasMany(p=> p.PersonOneRelationships)
-                .WithOne(relationship => relationship.PersonOne)
-                .HasForeignKey(relationship => relationship.PersonOneId)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            modelBuilder.Entity<Person>()
-                .HasMany(p => p.PersonTwoRelationships)
-                .WithOne(relationship => relationship.PersonTwo)
-                .HasForeignKey(relationship => relationship.PersonTwoId)
-                .OnDelete(DeleteBehavior.Cascade);
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

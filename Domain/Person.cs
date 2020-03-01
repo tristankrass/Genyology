@@ -24,10 +24,10 @@ namespace Domain
 
         public string? BirthSurname { get; set; }
 
-        [InverseProperty(nameof(Relationship.PersonOneId))]
+        [InverseProperty(nameof(Relationship.PersonOne))]
         public ICollection<Relationship>? PersonOneRelationships { get; set; }
 
-        [InverseProperty(nameof(Relationship.PersonTwoId))]
+        [InverseProperty(nameof(Relationship.PersonTwo))]
         public ICollection<Relationship>? PersonTwoRelationships { get; set; }
 
 

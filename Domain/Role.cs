@@ -11,10 +11,10 @@ namespace Domain
         [MaxLength(100)]
         public string RoleDescription { get; set; } = default!;
 
-        [InverseProperty(nameof(Relationship.PersonOne))]
+        [InverseProperty(nameof(Relationship.RoleOne))]
         public ICollection<Relationship>? RelationshipsOne { get; set; }
         
-        [InverseProperty(nameof(Relationship.PersonTwo))]
+        [InverseProperty(nameof(Relationship.RoleTwo))]
         public ICollection<Relationship>? RelationshipsTwo { get; set; }
     }
 }

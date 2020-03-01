@@ -1,0 +1,84 @@
+@page
+@model WebApp.Pages.Relationships.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].DateTimeFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].DateTimeTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].RelationShipDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].Family)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].PersonOne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].PersonTwo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].RoleOne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].RoleTwo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship[0].RelationshipType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Relationship) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RelationShipDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Family.FamilyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonOne.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonTwo.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleOne.RoleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleTwo.RoleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RelationshipType.RelationShipTypeDescription)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
