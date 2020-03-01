@@ -36,7 +36,8 @@ dotnet aspnet-codegenerator razorpage -m Relationship -dc ApplicationDbContext -
 dotnet aspnet-codegenerator razorpage -m RelationshipType -dc ApplicationDbContext -udl -outDir Pages/RelationshipTypes --referenceScriptLibraries -f
 dotnet aspnet-codegenerator razorpage -m Role -dc ApplicationDbContext -udl -outDir Pages/Roles --referenceScriptLibraries -f
 ```
-
+- [ ] Family should have many people.
+- [ ] Relationship should have 1 or 2 families.
 
 ### Data model
 
