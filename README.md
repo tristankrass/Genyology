@@ -35,10 +35,14 @@ dotnet aspnet-codegenerator razorpage -m Person -dc ApplicationDbContext -udl -o
 dotnet aspnet-codegenerator razorpage -m Relationship -dc ApplicationDbContext -udl -outDir Pages/Relationships --referenceScriptLibraries -f
 dotnet aspnet-codegenerator razorpage -m RelationshipType -dc ApplicationDbContext -udl -outDir Pages/RelationshipTypes --referenceScriptLibraries -f
 dotnet aspnet-codegenerator razorpage -m Role -dc ApplicationDbContext -udl -outDir Pages/Roles --referenceScriptLibraries -f
-```
+``
+
+### Todo
+
+- [ ] Currently does not generate GUIDs for Persons.
 - [ ] Family should have many people.
 - [ ] Relationship should have 1 or 2 families.
 
 ### Data model
 
-![Data Model](data_model.png)
+![Data Model](geny_data_model.png)
