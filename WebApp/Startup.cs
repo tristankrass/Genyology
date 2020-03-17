@@ -53,5 +53,17 @@ namespace WebApp
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
+
+        private static void UpdateDatabase(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration)
+        {
+            using var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope();
+
+            using var ctx = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+
+            // ctx.Database.EnsureDeleted();
+            ctx.Database.Migrate();
+        }
     }
 }

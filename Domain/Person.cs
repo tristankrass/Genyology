@@ -8,7 +8,6 @@ namespace Domain
 {
     public class Person: DomainEntity
     {
-        public Guid PersonId { get; set; }
 
         [MinLength(1), MaxLength(50)] public string FirstName { get; set; } = default!;
 
