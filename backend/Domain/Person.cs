@@ -10,11 +10,11 @@ namespace Domain
     public class Person: DomainEntity
     {
 
-        [MinLength(1), MaxLength(50)] public string FirstName { get; set; } = default!;
+        [MinLength(1), MaxLength(128)] public string FirstName { get; set; } = default!;
 
-        [MinLength(1), MaxLength(50)] public string LastName { get; set; } = default!;
+        [MinLength(1), MaxLength(128)] public string LastName { get; set; } = default!;
 
-        [MinLength(1), MaxLength(50)] public string? MiddleName { get; set; } = default!;
+        [MinLength(1), MaxLength(128)] public string? MiddleName { get; set; } = default!;
 
         public DateTime? DateOfBirth { get; set; }
 
@@ -32,6 +32,8 @@ namespace Domain
 
         public ICollection<PersonFamily>? Families { get; set; }
 
+        public Sex Sex { get; set; } = Sex.Undefined;
+        
         // App User 
         public Guid AppUserId { get; set; } = default!;
         public AppUser? AppUser { get; set; }

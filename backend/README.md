@@ -49,6 +49,22 @@ dotnet aspnet-codegenerator controller -name FamilyRelationshipsController -acti
 dotnet aspnet-codegenerator controller -name PersonFamiliesController -actions -m PersonFamily -dc ApplicationDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 ```
 
+### Generating base API-s
+```
+
+dotnet aspnet-codegenerator controller -name FamiliesController -actions -m Family -dc ApplicationDbContext -outDir ApiControllers -api --useAsyncActions  -f
+dotnet aspnet-codegenerator controller -name PersonsController -actions -m Person -dc ApplicationDbContext -outDir ApiControllers -api --useAsyncActions  -f
+
+dotnet aspnet-codegenerator controller -name RelationshipsController -actions -m Relationship -dc ApplicationDbContext -outDir ApiControllers -api --useAsyncActions  -f
+dotnet aspnet-codegenerator controller -name RelationshipTypesController -actions -m RelationshipType -dc ApplicationDbContext -outDir ApiControllers -api --useAsyncActions  -f
+
+dotnet aspnet-codegenerator controller -name RelationshipRolesController -actions -m RelationshipRole -dc ApplicationDbContext -outDir ApiControllers -api --useAsyncActions  -f
+dotnet aspnet-codegenerator controller -name FamilyRelationshipsController -actions -m FamilyRelationship -dc ApplicationDbContext -outDir ApiControllers -api --useAsyncActions  -f
+dotnet aspnet-codegenerator controller -name PersonFamiliesController -actions -m PersonFamily -dc ApplicationDbContext -outDir ApiControllers -api --useAsyncActions  -f
+
+```
+
+
 
 ### Validating model with razorpages
 ```
