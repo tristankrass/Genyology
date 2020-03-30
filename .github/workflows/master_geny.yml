@@ -21,15 +21,21 @@ jobs:
         dotnet-version: '3.1.102'
 
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: |
+        cd backend
+        dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: |
+        cd backend
+        dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
+      
       with:
         app-name: 'geny'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_fdac659bddbf4f7cbd1904a4f476286c }}
-        package: ${{env.DOTNET_ROOT}}/myapp 
+        package: ${{env.DOTNET_ROOT}}/myapp
+        
