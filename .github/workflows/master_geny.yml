@@ -19,12 +19,10 @@ jobs:
 
     - name: Build with dotnet
       run: |
-        cd backend
         dotnet build --configuration Release
 
     - name: dotnet publish
       run: |
-        cd backend
         dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
     - name: Deploy to Azure Web App
