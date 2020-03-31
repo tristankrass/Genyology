@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
+using Extensions;
 using PublicApi.DTO.V1;
 
 namespace WebApp.ApiControllers
@@ -22,9 +22,7 @@ namespace WebApp.ApiControllers
             _context = context;
         }
 
-        private static PersonDTO MapPersonToPersonDto(Person p)
-        {
-            return new PersonDTO()
+        private static PersonDto MapPersonToPersonDto(Person p) => new PersonDto()
             {
                 Id = p.Id,
                 FirstName = p.FirstName,
@@ -36,8 +34,8 @@ namespace WebApp.ApiControllers
                 PlaceOfBirth = p.PlaceOfBirth,
                 AppUserId = p.AppUserId,
             };
-        }
-        private static Person MapPersonDtoToPerson(PersonDTO p)
+
+        private static Person MapPersonDtoToPerson(PersonDto p)
         {
             var person = new Person()
             {
@@ -58,19 +56,21 @@ namespace WebApp.ApiControllers
             {
                 person.Id = p.Id;
             }
+
+            MetaData.AddMetaData(person);
             return person;
         }
 
         // GET: api/Persons
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonDTO>>> GetPersons()
+        public async Task<ActionResult<IEnumerable<PersonDto>>> GetPersons()
         {
             return Ok((await _context.Persons.ToListAsync()).Select(MapPersonToPersonDto));
         }
 
         // GET: api/Persons/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PersonDTO>> GetPerson(Guid id)
+        public async Task<ActionResult<PersonDto>> GetPerson(Guid id)
         {
             var person = await _context.Persons.FindAsync(id);
 
@@ -84,7 +84,7 @@ namespace WebApp.ApiControllers
 
       
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(Guid id, PersonDTO personDTO)
+        public async Task<IActionResult> PutPerson(Guid id, PersonDto personDTO)
         {
             if (id != personDTO.Id)
             {
@@ -92,6 +92,7 @@ namespace WebApp.ApiControllers
             }
             
             var person = MapPersonDtoToPerson(personDTO);
+           
 
             _context.Entry(person).State = EntityState.Modified;
 
@@ -115,7 +116,7 @@ namespace WebApp.ApiControllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(PersonDTO personDTO)
+        public async Task<ActionResult<Person>> PostPerson(PersonDto personDTO)
         {
             var person = MapPersonDtoToPerson(personDTO);
 
@@ -128,7 +129,7 @@ namespace WebApp.ApiControllers
 
         // DELETE: api/Persons/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonDTO>> DeletePerson(Guid id)
+        public async Task<ActionResult<PersonDto>> DeletePerson(Guid id)
         {
             var person = await _context.Persons.FindAsync(id);
 

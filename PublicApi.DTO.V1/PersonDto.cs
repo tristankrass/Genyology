@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PublicApi.DTO.V1
 {
-    public class PersonDTO
+    public class PersonDto
     {
         private int _sex = 0;
         public Guid Id { get; set; }

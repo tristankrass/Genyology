@@ -6,7 +6,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Test@123' --rm --name mssql --publ
 
 ### Data model
 
-![Data Model](geny_data_model.png)
+![Data Model](data_model.png)
 
 ### Installing dependencies
 

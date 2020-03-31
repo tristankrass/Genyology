@@ -6,12 +6,18 @@ namespace Extensions
 {
     public static class MetaData
     {
-        public static DomainEntity AddInitialClassMetaData(DomainEntity domainEntity, ClaimsPrincipal user)
+        public static DomainEntity AddInitialClassMetaDataIdentity(DomainEntity domainEntity, ClaimsPrincipal user)
         {
             domainEntity.CreatedAt = DateTime.Now;
             domainEntity.CreatedBy = user.UserId();
             domainEntity.ChangedAt = DateTime.Now;
             domainEntity.ChangedBy = user.UserId();
+            return domainEntity;
+        }
+        public static DomainEntity AddMetaData(DomainEntity domainEntity)
+        {
+            domainEntity.CreatedAt = DateTime.Now;
+            domainEntity.ChangedAt = DateTime.Now;
             return domainEntity;
         }
 

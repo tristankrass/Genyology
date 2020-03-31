@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Domain;
 using Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -25,11 +24,6 @@ namespace DAL.App.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //foreach (var relationship in modelBuilder.Model.GetEntityTypes()
-            //    .SelectMany(e => e.GetForeignKeys()))
-            //{
-            //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            //}
 
             modelBuilder.Entity<Person>()
                 .HasMany(p => p.PersonOneRelationships)

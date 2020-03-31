@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
+using Extensions;
+using PublicApi.DTO.V1;
 
 namespace WebApp.ApiControllers
 {
@@ -21,16 +22,39 @@ namespace WebApp.ApiControllers
             _context = context;
         }
 
-        // GET: api/RelationshipRoles
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<RelationshipRole>>> GetRelationshipRoles()
+        private static RelationshipRoleDTO MapRelationshipRoleToRelationshipRoleDto(RelationshipRole r) => new RelationshipRoleDTO()
         {
-            return await _context.RelationshipRoles.ToListAsync();
+            Id = r.Id,
+            RelationshipRoleName = r.RelationshipRoleName,
+            RelationshipRoleDescription = r.RelationshipRoleDescription
+        };
+
+        private static RelationshipRole MapRelationshipRoleDTOToRelationshipRole(RelationshipRoleDTO r)
+        {
+            var relationship = new RelationshipRole()
+            {
+                RelationshipRoleName = r.RelationshipRoleName,
+                RelationshipRoleDescription = r.RelationshipRoleDescription
+            };
+
+            if (r.Id.ToString().Length == 36)
+            {
+                relationship.Id = r.Id;
+            }
+
+            MetaData.AddMetaData(relationship);
+
+            return relationship;
         }
 
-        // GET: api/RelationshipRoles/5
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<RelationshipRoleDTO>>> GetRelationshipRoles()
+        {
+            return Ok((await _context.RelationshipRoles.ToListAsync()).Select(MapRelationshipRoleToRelationshipRoleDto));
+        }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<RelationshipRole>> GetRelationshipRole(Guid id)
+        public async Task<ActionResult<RelationshipRoleDTO>> GetRelationshipRole(Guid id)
         {
             var relationshipRole = await _context.RelationshipRoles.FindAsync(id);
 
@@ -39,19 +63,18 @@ namespace WebApp.ApiControllers
                 return NotFound();
             }
 
-            return relationshipRole;
+            return MapRelationshipRoleToRelationshipRoleDto(relationshipRole);
         }
 
-        // PUT: api/RelationshipRoles/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRelationshipRole(Guid id, RelationshipRole relationshipRole)
+        public async Task<IActionResult> PutRelationshipRole(Guid id, RelationshipRoleDTO relationshipRoleDTO)
         {
-            if (id != relationshipRole.Id)
+            if (id != relationshipRoleDTO.Id)
             {
                 return BadRequest();
             }
+
+            var relationshipRole = MapRelationshipRoleDTOToRelationshipRole(relationshipRoleDTO);
 
             _context.Entry(relationshipRole).State = EntityState.Modified;
 
@@ -71,24 +94,25 @@ namespace WebApp.ApiControllers
                 }
             }
 
-            return NoContent();
+            return Ok(relationshipRoleDTO);
         }
 
-        // POST: api/RelationshipRoles
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+    
         [HttpPost]
-        public async Task<ActionResult<RelationshipRole>> PostRelationshipRole(RelationshipRole relationshipRole)
+        public async Task<ActionResult<RelationshipRole>> PostRelationshipRole(RelationshipRoleDTO relationshipRoleDTO)
         {
-            _context.RelationshipRoles.Add(relationshipRole);
-            await _context.SaveChangesAsync();
+            var relationshipRole = MapRelationshipRoleDTOToRelationshipRole(relationshipRoleDTO);
 
-            return CreatedAtAction("GetRelationshipRole", new { id = relationshipRole.Id }, relationshipRole);
+            _context.RelationshipRoles.Add(relationshipRole);
+           
+            var id = await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRelationshipRole", new { id }, relationshipRoleDTO);
         }
 
-        // DELETE: api/RelationshipRoles/5
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult<RelationshipRole>> DeleteRelationshipRole(Guid id)
+        public async Task<ActionResult<RelationshipRoleDTO>> DeleteRelationshipRole(Guid id)
         {
             var relationshipRole = await _context.RelationshipRoles.FindAsync(id);
             if (relationshipRole == null)
@@ -99,7 +123,7 @@ namespace WebApp.ApiControllers
             _context.RelationshipRoles.Remove(relationshipRole);
             await _context.SaveChangesAsync();
 
-            return relationshipRole;
+            return NoContent();
         }
 
         private bool RelationshipRoleExists(Guid id)

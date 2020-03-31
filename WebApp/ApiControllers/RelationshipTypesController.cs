@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
@@ -21,14 +20,12 @@ namespace WebApp.ApiControllers
             _context = context;
         }
 
-        // GET: api/RelationshipTypes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RelationshipType>>> GetRelationshipTypes()
         {
             return await _context.RelationshipTypes.ToListAsync();
         }
 
-        // GET: api/RelationshipTypes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<RelationshipType>> GetRelationshipType(Guid id)
         {
@@ -42,9 +39,6 @@ namespace WebApp.ApiControllers
             return relationshipType;
         }
 
-        // PUT: api/RelationshipTypes/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRelationshipType(Guid id, RelationshipType relationshipType)
         {
@@ -74,9 +68,6 @@ namespace WebApp.ApiControllers
             return NoContent();
         }
 
-        // POST: api/RelationshipTypes
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<RelationshipType>> PostRelationshipType(RelationshipType relationshipType)
         {
@@ -86,7 +77,6 @@ namespace WebApp.ApiControllers
             return CreatedAtAction("GetRelationshipType", new { id = relationshipType.Id }, relationshipType);
         }
 
-        // DELETE: api/RelationshipTypes/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<RelationshipType>> DeleteRelationshipType(Guid id)
         {

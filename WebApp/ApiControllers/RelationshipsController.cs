@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
+using Extensions;
+using PublicApi.DTO.V1;
 
 namespace WebApp.ApiControllers
 {
@@ -21,16 +22,56 @@ namespace WebApp.ApiControllers
             _context = context;
         }
 
-        // GET: api/Relationships
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Relationship>>> GetRelationships()
+
+        private static RelationshipDTO MapRelationshipToRelationshipDto(Relationship relationship) => 
+            new RelationshipDTO()
+            {
+                Id = relationship.Id,
+                DateTimeFrom = relationship.DateTimeFrom,
+                DateTimeTo = relationship.DateTimeTo,
+                PersonOneId = relationship.PersonOneId,
+                PersonTwoId = relationship.PersonTwoId,
+                RelationshipName = relationship.RelationshipName,
+                RelationShipDetails = relationship.RelationShipDetails,
+                RelationshipTypeId = relationship.RelationshipTypeId,
+                RoleOneId = relationship.RoleOneId,
+                RoleTwoId = relationship.RoleTwoId
+
+            };
+
+        private static Relationship MapRelationshipDtoToRelationship(RelationshipDTO relationshipDTO)
         {
-            return await _context.Relationships.ToListAsync();
+            var relationship = new Relationship(){
+                Id = relationshipDTO.Id,
+                DateTimeFrom = relationshipDTO.DateTimeFrom,
+                DateTimeTo = relationshipDTO.DateTimeTo,
+                PersonOneId = relationshipDTO.PersonOneId,
+                PersonTwoId = relationshipDTO.PersonTwoId,
+                RelationshipName = relationshipDTO.RelationshipName,
+                RelationShipDetails = relationshipDTO.RelationShipDetails,
+                RelationshipTypeId = relationshipDTO.RelationshipTypeId,
+                RoleOneId = relationshipDTO.RoleOneId,
+                RoleTwoId = relationshipDTO.RoleTwoId
+            };
+
+            if (relationshipDTO.Id.ToString().Length == 36)
+            {
+                relationship.Id = relationship.Id;
+            }
+
+            MetaData.AddMetaData(relationship);
+
+            return relationship;
         }
 
-        // GET: api/Relationships/5
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<RelationshipDTO>>> GetRelationships()
+        {
+            return Ok((await _context.Relationships.ToListAsync()).Select(MapRelationshipToRelationshipDto));
+        }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Relationship>> GetRelationship(Guid id)
+        public async Task<ActionResult<RelationshipDTO>> GetRelationship(Guid id)
         {
             var relationship = await _context.Relationships.FindAsync(id);
 
@@ -39,19 +80,18 @@ namespace WebApp.ApiControllers
                 return NotFound();
             }
 
-            return relationship;
+            return MapRelationshipToRelationshipDto(relationship);
         }
 
-        // PUT: api/Relationships/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRelationship(Guid id, Relationship relationship)
+        public async Task<IActionResult> PutRelationship(Guid id, RelationshipDTO relationshipDTO)
         {
-            if (id != relationship.Id)
+            if (id != relationshipDTO.Id)
             {
                 return BadRequest();
             }
+
+            var relationship = MapRelationshipDtoToRelationship(relationshipDTO);
 
             _context.Entry(relationship).State = EntityState.Modified;
 
@@ -71,24 +111,23 @@ namespace WebApp.ApiControllers
                 }
             }
 
-            return NoContent();
+            return Ok(relationshipDTO);
         }
 
-        // POST: api/Relationships
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Relationship>> PostRelationship(Relationship relationship)
+        public async Task<ActionResult<RelationshipDTO>> PostRelationship(RelationshipDTO relationshipDTO)
         {
-            _context.Relationships.Add(relationship);
-            await _context.SaveChangesAsync();
+            var relationship = MapRelationshipDtoToRelationship(relationshipDTO);
 
-            return CreatedAtAction("GetRelationship", new { id = relationship.Id }, relationship);
+            _context.Relationships.Add(relationship);
+
+            var id = await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRelationship", new { id }, relationshipDTO);
         }
 
-        // DELETE: api/Relationships/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Relationship>> DeleteRelationship(Guid id)
+        public async Task<ActionResult<RelationshipDTO>> DeleteRelationship(Guid id)
         {
             var relationship = await _context.Relationships.FindAsync(id);
             if (relationship == null)
@@ -99,7 +138,7 @@ namespace WebApp.ApiControllers
             _context.Relationships.Remove(relationship);
             await _context.SaveChangesAsync();
 
-            return relationship;
+            return MapRelationshipToRelationshipDto(relationship);
         }
 
         private bool RelationshipExists(Guid id)

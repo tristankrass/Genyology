@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
@@ -21,14 +20,12 @@ namespace WebApp.ApiControllers
             _context = context;
         }
 
-        // GET: api/FamilyRelationships
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FamilyRelationship>>> GetFamilyRelationships()
         {
             return await _context.FamilyRelationships.ToListAsync();
         }
 
-        // GET: api/FamilyRelationships/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FamilyRelationship>> GetFamilyRelationship(Guid id)
         {
@@ -42,9 +39,6 @@ namespace WebApp.ApiControllers
             return familyRelationship;
         }
 
-        // PUT: api/FamilyRelationships/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFamilyRelationship(Guid id, FamilyRelationship familyRelationship)
         {
@@ -74,9 +68,6 @@ namespace WebApp.ApiControllers
             return NoContent();
         }
 
-        // POST: api/FamilyRelationships
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<FamilyRelationship>> PostFamilyRelationship(FamilyRelationship familyRelationship)
         {
@@ -86,7 +77,6 @@ namespace WebApp.ApiControllers
             return CreatedAtAction("GetFamilyRelationship", new { id = familyRelationship.Id }, familyRelationship);
         }
 
-        // DELETE: api/FamilyRelationships/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<FamilyRelationship>> DeleteFamilyRelationship(Guid id)
         {
