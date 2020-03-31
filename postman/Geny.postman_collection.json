@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "a8da35e5-ffae-4c5b-a8db-2f65f8eaf325",
+		"name": "Geny",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "getSinglePerson",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Persons/87c5d6a8-23f9-4aa6-cde2-08d7d5525634",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Persons",
+								"87c5d6a8-23f9-4aa6-cde2-08d7d5525634"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPersons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/persons",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editPerson",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"06fdd1ee-c9ef-4292-aee4-08d7d548883f\",\n    \"firstName\": \"Tristan\",\n    \"lastName\": \"Krass\",\n    \"middleName\": \"esimene\",\n    \"dateOfBirth\": \"1998-06-20T00:00:00\",\n    \"placeOfBirth\": null,\n    \"idCode\": null,\n    \"sex\": 1,\n    \"appUserId\": \"7eb8792e-3121-41a5-f30c-08d7d546002f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Persons/06fdd1ee-c9ef-4292-aee4-08d7d548883f",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Persons",
+								"06fdd1ee-c9ef-4292-aee4-08d7d548883f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPerson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"APi Is working\",\r\n    \"lastName\": \"yes\",\r\n    \"middleName\": null,\r\n    \"dateOfBirth\": \"1998-06-20T00:00:00\",\r\n    \"placeOfBirth\": null,\r\n    \"idCode\": null,\r\n    \"sex\": 2,\r\n    \"appUserId\": \"7eb8792e-3121-41a5-f30c-08d7d546002f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Persons/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Persons",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePerson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Persons/87c5d6a8-23f9-4aa6-cde2-08d7d5525634",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Persons",
+								"87c5d6a8-23f9-4aa6-cde2-08d7d5525634"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersonByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Persons/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Persons",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Relationships",
+			"item": [
+				{
+					"name": "getSingleRelationship",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Relationships/06fdd1ee-c9ef-4292-aee4-08d7d548883f",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Relationships",
+								"06fdd1ee-c9ef-4292-aee4-08d7d548883f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllRelationships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Relationships",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Relationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createRelationship",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"relationshipName\": \"foo\",\n\t\"dateTimeFrom\": \"2020-01-01\",\n\t\"dateTimeTo\": \"2020-10-10\",\n\t\"personOneId\": \"6c63a38b-d0ed-434f-aee5-08d7d548883f\",\n\t\"personTwoId\": \"06fdd1ee-c9ef-4292-aee4-08d7d548883f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Relationships",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Relationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditRelationShip",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Relationships/06fdd1ee-c9ef-4292-aee4-08d7d548883f",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Relationships",
+								"06fdd1ee-c9ef-4292-aee4-08d7d548883f"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "GetAllRelationshipRoles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/RelationshipRoles",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"RelationshipRoles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleRelationshipRole",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/RelationshipRoles/9d951815-7383-4b2d-d13f-08d7d5488863",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"RelationshipRoles",
+								"9d951815-7383-4b2d-d13f-08d7d5488863"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createRelationshipRole",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"relationshipRoleName\": \"Aunt\",\r\n    \"relationshipRoleDescription\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/RelationshipRoles",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"RelationshipRoles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editRelationshipRole",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"b727bba3-4124-4c64-2ac3-08d7d5601fb6\",\r\n    \"relationshipRoleName\": \"Aunt\",\r\n    \"relationshipRoleDescription\": \"Usually they are really friendly\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/RelationshipRoles/b727bba3-4124-4c64-2ac3-08d7d5601fb6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"RelationshipRoles",
+								"b727bba3-4124-4c64-2ac3-08d7d5601fb6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleterelationshipRole",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/RelationshipRoles/b727bba3-4124-4c64-2ac3-08d7d5601fb6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"RelationshipRoles",
+								"b727bba3-4124-4c64-2ac3-08d7d5601fb6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

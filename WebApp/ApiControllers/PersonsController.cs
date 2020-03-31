@@ -63,9 +63,18 @@ namespace WebApp.ApiControllers
 
         // GET: api/Persons
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonDto>>> GetPersons()
+        public async Task<ActionResult<IEnumerable<PersonDto>>> GetPersons(string? name)
         {
-            return Ok((await _context.Persons.ToListAsync()).Select(MapPersonToPersonDto));
+            var filter = name ?? "";
+            return Ok((await _context.Persons.ToListAsync())
+
+                .Where(p => p.FirstName.Contains(filter) ||
+                                p.FirstName.StartsWith(filter) || p.FirstName.EndsWith(filter) ||
+                                p.LastName.Contains(filter) ||
+                                p.LastName.StartsWith(filter) || p.LastName.EndsWith(filter)
+                )
+
+                .Select(MapPersonToPersonDto));
         }
 
         // GET: api/Persons/5

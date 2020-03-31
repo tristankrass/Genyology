@@ -1,5 +1,12 @@
-### Running docker 🐳
+# Net Group task 
 
+
+backend deployed [here](https://geny.azurewebsites.net/api/)
+
+To start testing out the API locally, just use the postman requests included
+inside the postman folder.
+
+### Running docker 🐳 for database
 ```
 docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Test@123' --rm --name mssql --publish 1433:1433 mcr.microsoft.com/mssql/server:2019-CU1-ubuntu-16.04
 ```
@@ -85,7 +92,6 @@ dotnet aspnet-codegenerator razorpage -m PersonFamily -dc ApplicationDbContext -
 ```
 dotnet aspnet-codegenerator identity -dc DAL.App.EF.ApplicationDbContext -f
 ```
-
 
 ### Todo
 
