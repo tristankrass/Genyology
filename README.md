@@ -4,6 +4,10 @@
 docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Test@123' --rm --name mssql --publish 1433:1433 mcr.microsoft.com/mssql/server:2019-CU1-ubuntu-16.04
 ```
 
+### Data model
+
+![Data Model](geny_data_model.png)
+
 ### Installing dependencies
 
 ```
@@ -89,6 +93,3 @@ dotnet aspnet-codegenerator identity -dc DAL.App.EF.ApplicationDbContext -f
 - [x] Family should have many people.
 - [x] Relationship should many families.
 
-### Data model
-
-![Data Model](geny_data_model.png)

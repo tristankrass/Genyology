@@ -1,3 +1,4 @@
+using System;
 using DAL.App.EF;
 using Domain.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -100,10 +101,16 @@ namespace WebApp
             using var userManager = serviceScope.ServiceProvider.GetService<UserManager<AppUser>>();
             using var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<AppRole>>();
 
-            // ctx.Database.EnsureDeleted();
-            // ctx.Database.Migrate();
+            //Console.WriteLine("Dropping database!");
+            //ctx.Database.EnsureDeleted();
+            
+            //Console.WriteLine("Migrating the Database!");
+            //ctx.Database.Migrate();
 
-            // SeedDatabase.SeedIdentity(userManager, roleManager);
+           
+            //SeedDatabase.SeedIdentity(userManager, roleManager);
+
+            // SeedDatabase.SeedInitialData(ctx);
         }
     }
 }

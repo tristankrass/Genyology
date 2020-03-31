@@ -53,10 +53,10 @@ namespace DAL.App.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    ChangedBy = table.Column<string>(nullable: true),
-                    ChangedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<Guid>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ChangedBy = table.Column<Guid>(nullable: true),
+                    ChangedAt = table.Column<DateTime>(nullable: false),
                     FamilyName = table.Column<string>(maxLength: 128, nullable: false),
                     FamilyDescription = table.Column<string>(maxLength: 60, nullable: true),
                     FamilyDateFrom = table.Column<DateTime>(nullable: true),
@@ -72,11 +72,12 @@ namespace DAL.App.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    ChangedBy = table.Column<string>(nullable: true),
-                    ChangedAt = table.Column<DateTime>(nullable: true),
-                    RelationshipRoleDescription = table.Column<string>(maxLength: 256, nullable: false)
+                    CreatedBy = table.Column<Guid>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ChangedBy = table.Column<Guid>(nullable: true),
+                    ChangedAt = table.Column<DateTime>(nullable: false),
+                    RelationshipRoleName = table.Column<string>(maxLength: 64, nullable: false),
+                    RelationshipRoleDescription = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,10 +89,10 @@ namespace DAL.App.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    ChangedBy = table.Column<string>(nullable: true),
-                    ChangedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<Guid>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ChangedBy = table.Column<Guid>(nullable: true),
+                    ChangedAt = table.Column<DateTime>(nullable: false),
                     RelationshipTypeName = table.Column<string>(maxLength: 128, nullable: false),
                     RelationShipTypeDescription = table.Column<string>(maxLength: 256, nullable: true)
                 },
@@ -211,17 +212,18 @@ namespace DAL.App.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    ChangedBy = table.Column<string>(nullable: true),
-                    ChangedAt = table.Column<DateTime>(nullable: true),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    MiddleName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatedBy = table.Column<Guid>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ChangedBy = table.Column<Guid>(nullable: true),
+                    ChangedAt = table.Column<DateTime>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 128, nullable: false),
+                    LastName = table.Column<string>(maxLength: 128, nullable: false),
+                    MiddleName = table.Column<string>(maxLength: 128, nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
                     PlaceOfBirth = table.Column<string>(nullable: true),
                     Occupation = table.Column<string>(nullable: true),
                     BirthSurname = table.Column<string>(nullable: true),
+                    Sex = table.Column<int>(nullable: false),
                     AppUserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -240,10 +242,10 @@ namespace DAL.App.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    ChangedBy = table.Column<string>(nullable: true),
-                    ChangedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<Guid>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ChangedBy = table.Column<Guid>(nullable: true),
+                    ChangedAt = table.Column<DateTime>(nullable: false),
                     PersonId = table.Column<Guid>(nullable: false),
                     FamilyId = table.Column<Guid>(nullable: false)
                 },
@@ -269,10 +271,10 @@ namespace DAL.App.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    ChangedBy = table.Column<string>(nullable: true),
-                    ChangedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<Guid>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ChangedBy = table.Column<Guid>(nullable: true),
+                    ChangedAt = table.Column<DateTime>(nullable: false),
                     RelationshipName = table.Column<string>(maxLength: 128, nullable: true),
                     RelationShipDetails = table.Column<string>(maxLength: 256, nullable: true),
                     DateTimeFrom = table.Column<DateTime>(nullable: false),
@@ -323,10 +325,10 @@ namespace DAL.App.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    ChangedBy = table.Column<string>(nullable: true),
-                    ChangedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<Guid>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ChangedBy = table.Column<Guid>(nullable: true),
+                    ChangedAt = table.Column<DateTime>(nullable: false),
                     RelationshipId = table.Column<Guid>(nullable: false),
                     FamilyId = table.Column<Guid>(nullable: false)
                 },

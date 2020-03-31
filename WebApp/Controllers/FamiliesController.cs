@@ -35,6 +35,7 @@ namespace WebApp.Controllers
 
             var family = await _context.Families
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (family == null)
             {
                 return NotFound();

@@ -6,9 +6,13 @@ using DAL.Base;
 namespace Domain
 {
   public class RelationshipRole : DomainEntity
-    {
-        [MaxLength(256)]
-        public string RelationshipRoleDescription { get; set; } = default!;
+  {
+
+        [MinLength(1), MaxLength(64)]
+        public string RelationshipRoleName { get; set; } = default!;
+
+        [MinLength(1), MaxLength(256)]
+        public string? RelationshipRoleDescription { get; set; } = default!;
 
         [InverseProperty(nameof(Relationship.RoleOne))]
         public ICollection<Relationship>? RelationshipsOne { get; set; }

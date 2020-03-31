@@ -11,9 +11,9 @@ namespace DAL.Base
         where TKey : struct, IEquatable<TKey>
     {
         public virtual TKey Id { get; set; }
-        public virtual string? CreatedBy { get; set; }
-        public virtual DateTime? CreatedAt { get; set; }
-        public virtual string? ChangedBy { get; set; }
-        public virtual DateTime? ChangedAt { get; set; }
+        public virtual Guid? CreatedBy { get; set; }
+        public virtual DateTime CreatedAt { get; set; }
+        public virtual Guid? ChangedBy { get; set; }
+        public virtual DateTime ChangedAt { get; set; }
     }
 }
