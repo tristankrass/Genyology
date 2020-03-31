@@ -104,8 +104,8 @@ namespace WebApp
             //Console.WriteLine("Dropping database!");
             //ctx.Database.EnsureDeleted();
             
-            //Console.WriteLine("Migrating the Database!");
-            //ctx.Database.Migrate();
+            Console.WriteLine("Migrating the Database!");
+            ctx.Database.Migrate();
 
            
             //SeedDatabase.SeedIdentity(userManager, roleManager);

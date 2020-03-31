@@ -33,7 +33,8 @@ namespace Domain
         public ICollection<PersonFamily>? Families { get; set; }
 
         public Sex Sex { get; set; } = Sex.Undefined;
-        
+        [MinLength(11), MaxLength(25)]
+        public string? IdCode { get; set; }
         // App User 
         public Guid AppUserId { get; set; } = default!;
         public AppUser? AppUser { get; set; }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PublicApi.DTO.V1
 {
-    public class PersonDto
+    public class PersonDTO
     {
         private int _sex = 0;
         public Guid Id { get; set; }
@@ -17,6 +17,9 @@ namespace PublicApi.DTO.V1
         public DateTime? DateOfBirth { get; set; }
 
         public string? PlaceOfBirth { get; set; }
+
+        [MinLength(11), MaxLength(25)]
+        public string? IdCode { get; set; }
 
         public int Sex
         {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
+using PublicApi.DTO.V1;
 
 namespace WebApp.ApiControllers
 {
@@ -21,16 +22,55 @@ namespace WebApp.ApiControllers
             _context = context;
         }
 
+        private static PersonDTO MapPersonToPersonDto(Person p)
+        {
+            return new PersonDTO()
+            {
+                Id = p.Id,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                MiddleName = p.MiddleName,
+                IdCode = p.IdCode,
+                Sex = (int)p.Sex,
+                DateOfBirth = p.DateOfBirth,
+                PlaceOfBirth = p.PlaceOfBirth,
+                AppUserId = p.AppUserId,
+            };
+        }
+        private static Person MapPersonDtoToPerson(PersonDTO p)
+        {
+            var person = new Person()
+            {
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                MiddleName = p.MiddleName,
+                IdCode = p.IdCode,
+                Sex = (Sex)p.Sex,
+                DateOfBirth = p.DateOfBirth,
+                PlaceOfBirth = p.PlaceOfBirth,
+                AppUserId = p.AppUserId,
+                // Meta fields
+                ChangedAt = DateTime.UtcNow,
+                ChangedBy = p.AppUserId
+            };
+
+            if (p.Id.ToString().Length == 36)
+            {
+                person.Id = p.Id;
+            }
+            return person;
+        }
+
         // GET: api/Persons
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPersons()
+        public async Task<ActionResult<IEnumerable<PersonDTO>>> GetPersons()
         {
-            return await _context.Persons.ToListAsync();
+            return Ok((await _context.Persons.ToListAsync()).Select(MapPersonToPersonDto));
         }
 
         // GET: api/Persons/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(Guid id)
+        public async Task<ActionResult<PersonDTO>> GetPerson(Guid id)
         {
             var person = await _context.Persons.FindAsync(id);
 
@@ -39,19 +79,19 @@ namespace WebApp.ApiControllers
                 return NotFound();
             }
 
-            return person;
+            return MapPersonToPersonDto(person);
         }
 
-        // PUT: api/Persons/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+      
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(Guid id, Person person)
+        public async Task<IActionResult> PutPerson(Guid id, PersonDTO personDTO)
         {
-            if (id != person.Id)
+            if (id != personDTO.Id)
             {
                 return BadRequest();
             }
+            
+            var person = MapPersonDtoToPerson(personDTO);
 
             _context.Entry(person).State = EntityState.Modified;
 
@@ -71,26 +111,27 @@ namespace WebApp.ApiControllers
                 }
             }
 
-            return NoContent();
+            return Ok(personDTO);
         }
 
-        // POST: api/Persons
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(Person person)
+        public async Task<ActionResult<Person>> PostPerson(PersonDTO personDTO)
         {
-            _context.Persons.Add(person);
-            await _context.SaveChangesAsync();
+            var person = MapPersonDtoToPerson(personDTO);
 
-            return CreatedAtAction("GetPerson", new { id = person.Id }, person);
+            _context.Persons.Add(person);
+            
+            var id = await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetPerson", new { id }, personDTO);
         }
 
         // DELETE: api/Persons/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Person>> DeletePerson(Guid id)
+        public async Task<ActionResult<PersonDTO>> DeletePerson(Guid id)
         {
             var person = await _context.Persons.FindAsync(id);
+
             if (person == null)
             {
                 return NotFound();
@@ -99,7 +140,7 @@ namespace WebApp.ApiControllers
             _context.Persons.Remove(person);
             await _context.SaveChangesAsync();
 
-            return person;
+            return NoContent();
         }
 
         private bool PersonExists(Guid id)
